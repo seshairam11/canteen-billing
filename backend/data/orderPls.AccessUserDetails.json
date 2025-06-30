@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "67ce0d091a72fcf21453407f"
+  },
+  "userName": "sesha",
+  "mailID": "sesha@gmail.com",
+  "phone": "7010631022",
+  "password": "123456",
+  "userType": "user",
+  "createdAt": {
+    "$date": "2025-03-09T21:50:01.074Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ce10011a72fcf214534083"
+  },
+  "userName": "akash",
+  "mailID": "akash@gmail.com",
+  "phone": "1234569870",
+  "password": "123456",
+  "userType": "user",
+  "createdAt": {
+    "$date": "2025-03-09T22:02:41.489Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ce12911a72fcf214534088"
+  },
+  "userName": "hnkdnk",
+  "mailID": "lsdklksdj@mdkmv.dflf",
+  "phone": "5411313131",
+  "password": "123456",
+  "userType": "user",
+  "createdAt": {
+    "$date": "2025-03-09T22:13:37.441Z"
+  },
+  "__v": 0
+}]
