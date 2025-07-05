@@ -4,7 +4,7 @@ const useFetch = () => {
   const [isLoadingApi, setisLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
   const [apiKey, setApiKey] = useState(null);
-  const baseURI = `http://${process.env.REACT_APP_IP_ADDRESS}:8000`;
+  const baseURI = `https://canteen-billing-1.onrender.com`;
   console.log(baseURI)
  
 

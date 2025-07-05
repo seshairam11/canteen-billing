@@ -21,7 +21,7 @@ export const OPCasherBilling = () => {
     const menu_List = useRef([]);
     const price_Total = useRef(null);
 
-    const socketUrl = `http://${process.env.REACT_APP_IP_ADDRESS}:8000`
+    const socketUrl = `https://canteen-billing-1.onrender.com`
     const socketRef = useRef(null);
     const validate = OPValidations();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
