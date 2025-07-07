@@ -21,7 +21,7 @@ export const OPServerOrderPlacing = () => {
     const tbl_menu = useRef([])
     const responce_data = useRef([]);
 
-    const socketUrl = `https://canteen-billing-1.onrender.com`
+    const socketUrl = `https://canteen-billing.onrender.com`
     const socketRef = useRef(null);
     const validate = OPValidations();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
