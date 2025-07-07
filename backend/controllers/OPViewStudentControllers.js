@@ -107,3 +107,10 @@ exports.validateStudent = async (req, res, next) => {
         });
     }
 }
+
+exports.testing = async (req, res, next) => {
+    res.json({
+        isAuth: false,
+        errormsg: "access denied",
+    });
+}   

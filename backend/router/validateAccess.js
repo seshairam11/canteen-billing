@@ -12,7 +12,7 @@ const { addMenu } = require('../controllers/OPAddMenuCardControllers');
 const { addBench } = require('../controllers/OPAddBenchControllers');
 const { viewBench } = require('../controllers/OPViewBenchControllers');
 const { deleteBench } = require('../controllers/OPDeleteBenchControllers');
-const { viewStudent, deleteStudent, addStudent, validateStudent } = require('../controllers/OPViewStudentControllers');
+const { viewStudent, deleteStudent, addStudent, validateStudent, testing } = require('../controllers/OPViewStudentControllers');
 const router = express.Router()
 
 router.route('/loginemployees').post(validateUserAccess);
@@ -33,5 +33,6 @@ router.route('/viewstudent').post(viewStudent);
 router.route('/addstudent').post(addStudent);
 router.route('/deletestudent').post(deleteStudent);
 router.route('/student-login').post(validateStudent);
+router.route('/testing').post(testing);
 
 module.exports = router;
