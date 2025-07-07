@@ -4,7 +4,7 @@ const useFetch = () => {
   const [isLoadingApi, setisLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
   const [apiKey, setApiKey] = useState(null);
-  const baseURI = `https://canteen-billing-1.onrender.com`;
+  const baseURI = `https://canteen-billing.onrender.com`;
   console.log(baseURI)
  
 
