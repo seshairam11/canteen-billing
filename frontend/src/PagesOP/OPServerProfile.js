@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
 import { OPTextBox } from '../ComponentOP/OPTextBox';
 import { useSelector } from 'react-redux';
@@ -8,13 +7,11 @@ export const OPServerProfile = () => {
     const [startInit, setStartInit] = useState(true);
     const [startRender, setStartRender] = useState(false);
     const [startLoader, setStartLoader] = useState(true);
-    const [rerender, setRerender] = useState(true);
 
     const ctlAttribute = useRef([]);
 
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
 
-    const validate = OPValidations();
     function initControl() {
         let ctlArray = [
             {
@@ -193,17 +190,6 @@ export const OPServerProfile = () => {
         setStartLoader(false);
     }
 
-
-
-
-    function handleButtonClick(e) {
-        let btn_id = e.currentTarget.id;
-        console.log(btn_id);
-        switch (btn_id) {
-
-        }
-    }
-
     useEffect(() => {
         if (startInit === true)
             initControl();
@@ -249,7 +235,6 @@ export const OPServerProfile = () => {
                                                                 <div className="mb-3">
                                                                     <OPTextBox
                                                                         ctl_Attribute={ctlAttribute.current[0]}
-                                                                        rerender={rerender}
                                                                     />
                                                                 </div>
                                                             </div>
@@ -257,7 +242,6 @@ export const OPServerProfile = () => {
                                                                 <div className="mb-3">
                                                                     <OPTextBox
                                                                         ctl_Attribute={ctlAttribute.current[1]}
-                                                                        rerender={rerender}
                                                                     />
                                                                 </div>
                                                             </div>
@@ -265,7 +249,6 @@ export const OPServerProfile = () => {
                                                                 <div className="mb-3">
                                                                     <OPTextBox
                                                                         ctl_Attribute={ctlAttribute.current[2]}
-                                                                        rerender={rerender}
                                                                     />
                                                                 </div>
                                                             </div>
@@ -273,7 +256,6 @@ export const OPServerProfile = () => {
                                                                 <div className="mb-3">
                                                                     <OPTextBox
                                                                         ctl_Attribute={ctlAttribute.current[3]}
-                                                                        rerender={rerender}
                                                                     />
                                                                 </div>
                                                             </div>
@@ -281,7 +263,6 @@ export const OPServerProfile = () => {
                                                                 <div className="mb-3">
                                                                     <OPTextBox
                                                                         ctl_Attribute={ctlAttribute.current[4]}
-                                                                        rerender={rerender}
                                                                     />
                                                                 </div>
                                                             </div>
@@ -289,7 +270,6 @@ export const OPServerProfile = () => {
                                                                 <div className="mb-3">
                                                                     <OPTextBox
                                                                         ctl_Attribute={ctlAttribute.current[5]}
-                                                                        rerender={rerender}
                                                                     />
                                                                 </div>
                                                             </div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
 import { OPButton } from '../ComponentOP/OPButton';
 import { useSelector } from 'react-redux';
@@ -13,7 +12,6 @@ export const OPViewEmployees = () => {
     const [startInit, setStartInit] = useState(true);
     const [startRender, setStartRender] = useState(false);
     const [startLoader, setStartLoader] = useState(true);
-    const [rerender, setRerender] = useState(true);
     const [notify, setNotify] = useState(false);
     const [listEmp, setListEmp] = useState(true);
     const [viewEmp, setViewEmp] = useState(false);
@@ -22,9 +20,8 @@ export const OPViewEmployees = () => {
     const ctlNotify = useRef({})
     const tbl_empLst = useRef({})
 
-    const validate = OPValidations();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
-    const { responseData, isLoadingApi, apiKey, fetchError, serverRequest } = useFetch();
+    const { responseData, isLoadingApi, apiKey, serverRequest } = useFetch();
     function fnViewEmpRequest() {
         let _getBody = {
             companyName: getAppStoreData.companyName,
@@ -341,12 +338,7 @@ export const OPViewEmployees = () => {
         };
         tbl_empLst.current = l_tbl_empLst
     }
-    function checkPassword(p1, p2) {
-        if (p1 === p2) {
-            return true
-        }
-        return false;
-    }
+
 
 
     function handleButtonClick(e) {
@@ -358,6 +350,8 @@ export const OPViewEmployees = () => {
                 break;
             case "btn_delete":
                 fnDeleteData();
+                break;
+            default:
                 break;
         }
     }
@@ -395,7 +389,7 @@ export const OPViewEmployees = () => {
             ctlNotify.current = {
                 name: "Employee Deleted Successfully",
                 title: responseData.errormsg.userName,
-                photo:"success"
+                photo: "success"
             }
             setViewEmp(false);
             setListEmp(true);
@@ -416,6 +410,8 @@ export const OPViewEmployees = () => {
                         break;
                     case "VIEWEMP":
                         initControl();
+                        break;
+                    default:
                         break;
                 }
             }
@@ -499,7 +495,6 @@ export const OPViewEmployees = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[0]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -507,7 +502,6 @@ export const OPViewEmployees = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[1]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -517,7 +511,6 @@ export const OPViewEmployees = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[2]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -525,7 +518,6 @@ export const OPViewEmployees = () => {
                                                                     <div className="mb-3">
                                                                         <OPDropDown
                                                                             ctl_Attribute={ctlAttribute.current[3]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>

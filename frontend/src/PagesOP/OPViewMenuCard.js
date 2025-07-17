@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
 import { OPButton } from '../ComponentOP/OPButton';
 import { useSelector } from 'react-redux';
@@ -13,7 +12,6 @@ export const OPViewMenuCard = () => {
     const [startInit, setStartInit] = useState(true);
     const [startRender, setStartRender] = useState(false);
     const [startLoader, setStartLoader] = useState(true);
-    const [rerender, setRerender] = useState(true);
     const [notify, setNotify] = useState(false);
     const [listMenu, setListMenu] = useState(true);
     const [viewMenu, setViewMenu] = useState(false);
@@ -22,9 +20,8 @@ export const OPViewMenuCard = () => {
     const ctlNotify = useRef({})
     const tbl_menuLst = useRef({})
 
-    const validate = OPValidations();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
-    const { responseData, isLoadingApi, apiKey, fetchError, serverRequest } = useFetch();
+    const { responseData, isLoadingApi, apiKey, serverRequest } = useFetch();
     function fnViewMenuRequest() {
         let _getBody = {
             companyName: getAppStoreData.companyName,
@@ -265,6 +262,8 @@ export const OPViewMenuCard = () => {
             case "btn_delete":
                 fnDeleteData();
                 break;
+            default:
+                break;
         }
     }
 
@@ -320,6 +319,8 @@ export const OPViewMenuCard = () => {
                         break;
                     case "VIEWMENU":
                         initControl();
+                        break;
+                    default:
                         break;
                 }
             }
@@ -403,7 +404,6 @@ export const OPViewMenuCard = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[0]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -411,7 +411,6 @@ export const OPViewMenuCard = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[1]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -419,7 +418,6 @@ export const OPViewMenuCard = () => {
                                                                     <div className="mb-3">
                                                                         <OPDate
                                                                             ctl_Attribute={ctlAttribute.current[4]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -427,7 +425,6 @@ export const OPViewMenuCard = () => {
                                                                     <div className="mb-3">
                                                                         <OPDate
                                                                             ctl_Attribute={ctlAttribute.current[5]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>

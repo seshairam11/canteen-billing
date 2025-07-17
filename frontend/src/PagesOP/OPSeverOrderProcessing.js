@@ -195,7 +195,7 @@ export const OPServerOrderProcessing = () => {
         responce_data.current = l_responceData;
         console.log(l_responceData);
         const benchlst = l_responceData
-            .filter(sts => sts.status == "process" || sts.status == "waiting");
+            .filter(sts => sts.status === "process" || sts.status === "waiting");
 
         let l_bench = {
             groupbtnname: "beanchlst",
@@ -395,6 +395,9 @@ export const OPServerOrderProcessing = () => {
             case "btn_confirm_search":
                 fnConfirmOrder();
                 break;
+            default:
+                console.log("No action defined for this button");
+                break;
         }
     }
     function handleGroupButtonClick(groupBtnName, index) {
@@ -409,6 +412,9 @@ export const OPServerOrderProcessing = () => {
                 tbl_menu.current.grpbtnrowid = ctlBench.current.groupbtndata[index]._id;
                 tbl_menu.current.tableData = clonedData;
                 break;
+            default:
+                console.log("No action defined for this button");
+                break;
         }
         setSideBar(true);
     }
@@ -416,6 +422,9 @@ export const OPServerOrderProcessing = () => {
         switch (tablename) {
             case "tbl_orderlist":
                 fnTableOrderList(index, rowmode, rowaction);
+                break;
+            default:
+                console.log("No action defined for this button");
                 break;
         }
     }
@@ -437,9 +446,9 @@ export const OPServerOrderProcessing = () => {
 
         socketRef.current.on('documentUpdated', (docId, newContent, status) => {
             const index = ctlBench.current.groupbtndata.findIndex(item => item._id === docId);
-            if (status == "waiting") {
+            if (status === "waiting") {
                 ctlBench.current.groupbtndata.push(newContent)
-            } else if (status == "process") {
+            } else if (status === "process") {
                 ctlBench.current.groupbtndata.splice(index, 1, newContent)
             } else {
                 ctlBench.current.groupbtndata.splice(index, 1)

@@ -3,14 +3,11 @@ import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
 import { OPGroupButton } from '../ComponentOP/OPGroupButton';
 import { OPButton } from '../ComponentOP/OPButton';
-import { OPLocalSearchBar } from '../ComponentOP/OPLocalSearchBar';
-import { OPTextBox } from '../ComponentOP/OPTextBox';
 import { OPVerticalTable } from '../ComponentOP/OPVerticalTable';
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useSelector } from 'react-redux';
 
 export const OPServerOrderCompleted = () => {
-    const [startInit, setStartInit] = useState(true);
     const [startRender, setStartRender] = useState(false);
     const [startLoader, setStartLoader] = useState(true);
     const [sideBar, setSideBar] = useState(false);
@@ -177,7 +174,7 @@ export const OPServerOrderCompleted = () => {
     function fnCreateBench(l_responceData) {
         responce_data.current = l_responceData;
         const benchlst = l_responceData
-            .filter(sts => sts.status == "close")
+            .filter(sts => sts.status === "close")
 
         let l_bench = {
             groupbtnname: "beanchlst",
@@ -347,6 +344,9 @@ export const OPServerOrderCompleted = () => {
             case "btn_confirm_search":
                 fnConfirmOrder();
                 break;
+            default:
+                console.log("No action defined for this button");
+                break;
 
         }
     }
@@ -362,6 +362,9 @@ export const OPServerOrderCompleted = () => {
                 tbl_menu.current.grpbtnrowid = ctlBench.current.groupbtndata[index]._id;
                 tbl_menu.current.tableData = clonedData;
                 break;
+            default:
+                console.log("No action defined for this button");
+                break;
         }
         setSideBar(true);
     }
@@ -369,6 +372,9 @@ export const OPServerOrderCompleted = () => {
         switch (tablename) {
             case "tbl_orderlist":
                 fnTableOrderList(index, rowmode, rowaction);
+                break;
+            default:
+                console.log("No action defined for this button");
                 break;
         }
     }
@@ -390,7 +396,7 @@ export const OPServerOrderCompleted = () => {
         });
 
         socketRef.current.on('documentUpdated', (docId, newContent, status) => {
-            if (status == "close") {
+            if (status === "close") {
                 console.log(newContent)
                 ctlBench.current.groupbtndata.push(newContent)
                 setRerender(prevRerender => !prevRerender);

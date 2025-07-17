@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
 import { OPButton } from '../ComponentOP/OPButton';
 import { useSelector } from 'react-redux';
@@ -7,13 +6,11 @@ import useFetch from '../ApiOP/useFetch';
 import { OPNotification } from '../ComponentOP/OPNotification';
 import { OPReadOnlyListTable } from '../ComponentOP/OPReadOnlyTable';
 import { OPTextBox } from '../ComponentOP/OPTextBox';
-import { OPDropDown } from '../ComponentOP/OPDropDown';
 
 export const OPViewStudents = () => {
     const [startInit, setStartInit] = useState(true);
     const [startRender, setStartRender] = useState(false);
     const [startLoader, setStartLoader] = useState(true);
-    const [rerender, setRerender] = useState(true);
     const [notify, setNotify] = useState(false);
     const [listEmp, setListEmp] = useState(true);
     const [viewEmp, setViewEmp] = useState(false);
@@ -22,9 +19,8 @@ export const OPViewStudents = () => {
     const ctlNotify = useRef({})
     const tbl_empLst = useRef({})
 
-    const validate = OPValidations();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
-    const { responseData, isLoadingApi, apiKey, fetchError, serverRequest } = useFetch();
+    const { responseData, isLoadingApi, apiKey, serverRequest } = useFetch();
     function fnViewEmpRequest() {
         let _getBody = {
             companyName: getAppStoreData.companyName,
@@ -410,6 +406,8 @@ export const OPViewStudents = () => {
                 const url = `https://api.qrserver.com/v1/create-qr-code/?data=http://${process.env.REACT_APP_IP_ADDRESS}:3000/user/${tbl_empLst.current.tabledataid}&size=200x200`;
                 window.open(url, '_blank');
                 break;
+            default:
+                break;
         }
     }
 
@@ -468,6 +466,8 @@ export const OPViewStudents = () => {
                         break;
                     case "VIEWEMP":
                         initControl();
+                        break;
+                    default:
                         break;
                 }
             }
@@ -551,7 +551,6 @@ export const OPViewStudents = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[0]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -559,7 +558,6 @@ export const OPViewStudents = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[1]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -567,7 +565,6 @@ export const OPViewStudents = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[2]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -577,7 +574,6 @@ export const OPViewStudents = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[3]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -585,7 +581,6 @@ export const OPViewStudents = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[11]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -593,7 +588,6 @@ export const OPViewStudents = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[12]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>

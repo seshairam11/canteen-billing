@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import "./assets/css/animate.css";
 import "./assets/css/bootstrap.min.css";
@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 function App() {
   const l_Route = OPRoutes();
   const getAppStoreData = useSelector((state) => state.appstate.login_info);
-  console.log(process.env.REACT_APP_IP_ADDRESS);
   return (
     <>
       <Routes>

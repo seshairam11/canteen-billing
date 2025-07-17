@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
-import { OPGroupButton } from '../ComponentOP/OPGroupButton';
 import { OPButton } from '../ComponentOP/OPButton';
-import { OPLocalSearchBar } from '../ComponentOP/OPLocalSearchBar';
 import { OPTextBox } from '../ComponentOP/OPTextBox';
-import { OPVerticalTable } from '../ComponentOP/OPVerticalTable';
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
 import useFetch from '../ApiOP/useFetch';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setlogininfo } from '../brewStore/AppState';
 import { OPLink } from '../ComponentOP/OPLink';
 
@@ -22,16 +19,13 @@ export const OPUserEntry = () => {
     const [rerender, setRerender] = useState(false);
 
     const ctlAttribute = useRef([]);
-    const ctlBench = useRef({});
     const tbl_menu = useRef([])
-    const responce_data = useRef([]);
 
-    const socketUrl = `http://${process.env.REACT_APP_IP_ADDRESS}:8000`
+    const socketUrl = `https://canteen-billing.onrender.com`
     const socketRef = useRef(null);
     const validate = OPValidations();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
-    const [isAuthenticate, setIsAuthenticate] = useState(!getAppStoreData.isloggedin)
-    const { responseData, isLoadingApi, apiKey, fetchError, serverRequest } = useFetch();
+    const { responseData, isLoadingApi, apiKey, serverRequest } = useFetch();
     const dispatchappStore = useDispatch();
     const navigate = useNavigate();
 
@@ -242,20 +236,7 @@ export const OPUserEntry = () => {
         setStartRender(true);
         setStartLoader(false);
     }
-    function fnCreateBench(l_responceData) {
-        responce_data.current = l_responceData;
-        console.log(l_responceData)
-        const benchlst = l_responceData
-            .filter(sts => sts.status == "open")
 
-        let l_bench = {
-            groupbtnname: "beanchlst",
-            groupbtnselectedname: null,
-            groupbtndata: benchlst
-        }
-        ctlBench.current = l_bench;
-
-    }
 
     function fnBuildMenuList() {
         let l_tbl_menu = {
@@ -307,19 +288,7 @@ export const OPUserEntry = () => {
         };
         tbl_menu.current = l_tbl_menu
     }
-    function fnTableOrderList(index, rowmode, rowaction) {
-        if (rowaction === 2) {
-            tbl_menu.current.tableData.splice(index, 1);
-            setRerender(!rerender)
-        } else if (rowaction === 1) {
-            tbl_menu.current.tableaction = 1;
-            tbl_menu.current.tableindex = index;
-            let t_data = tbl_menu.current.tableData[index].table_value
-            ctlAttribute.current[0].inputvalue = t_data[0].t_value
-            ctlAttribute.current[1].inputvalue = t_data[1].t_value
-            setAddOrder(true);
-        }
-    }
+
     function fnConfirmOrder() {
         let canFormSubmit = true;
         let err = [];
@@ -437,6 +406,9 @@ export const OPUserEntry = () => {
                     fnSendData();
                 }
                 break;
+            default:
+                console.log("No action defined for this button");
+                break;
         }
     }
     function fnSendData() {
@@ -456,25 +428,6 @@ export const OPUserEntry = () => {
         console.log(serverRequestParam)
         serverRequest(serverRequestParam);
     }
-    function handleGroupButtonClick(groupBtnName, index) {
-        switch (groupBtnName) {
-            case "beanchlst":
-                document.body.style.overflow = "hidden";
-                const clonedData = structuredClone(ctlBench.current.groupbtndata[index].btn_values);
-                ctlBench.current.groupbtnselectedname = ctlBench.current.groupbtndata[index].labelname;
-                tbl_menu.current.grpbtnrowid = ctlBench.current.groupbtndata[index]._id;
-                tbl_menu.current.tableData = clonedData;
-                break;
-        }
-        setSideBar(true);
-    }
-    function handleTableActionClick(tablename, index, rowmode, rowaction) {
-        switch (tablename) {
-            case "tbl_orderlist":
-                fnTableOrderList(index, rowmode, rowaction);
-                break;
-        }
-    }
 
 
     useEffect(() => {
@@ -491,8 +444,6 @@ export const OPUserEntry = () => {
             initControl();
         });
 
-
-
         // Cleanup: Disconnect the socket on component unmount
         return () => {
             if (socketRef.current) {
@@ -507,6 +458,9 @@ export const OPUserEntry = () => {
                 switch (apiKey) {
                     case "LOGIN":
                         fnSignupResponse();
+                        break;
+                        default:
+                        console.log("No action defined for this API key");
                         break;
                 }
             }

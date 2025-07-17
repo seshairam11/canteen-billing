@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
-import { OPGroupButton } from '../ComponentOP/OPGroupButton';
 import { OPButton } from '../ComponentOP/OPButton';
 import { OPLocalSearchBar } from '../ComponentOP/OPLocalSearchBar';
 import { OPTextBox } from '../ComponentOP/OPTextBox';
 import { OPVerticalTable } from '../ComponentOP/OPVerticalTable';
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useSelector } from 'react-redux';
 
 export const OPServerOrderPlacing = () => {
@@ -19,7 +18,6 @@ export const OPServerOrderPlacing = () => {
     const ctlAttribute = useRef([]);
     const ctlBench = useRef({});
     const tbl_menu = useRef([])
-    const responce_data = useRef([]);
 
     const socketUrl = `https://canteen-billing.onrender.com`
     const socketRef = useRef(null);
@@ -342,7 +340,6 @@ export const OPServerOrderPlacing = () => {
                 },
             ]
         }));
-        console.log(newContent)
         const studentName = getAppStoreData.userName;
         const collageid = getAppStoreData.collageid;
         socketRef.current.emit('updateServerOrderPlacing', newContent, studentName, collageid);
@@ -368,7 +365,7 @@ export const OPServerOrderPlacing = () => {
                 break;
             case "btn_save":
                 console.log(tbl_menu.current.tableData.length)
-                if (tbl_menu.current.tableData.length != 0) {
+                if (tbl_menu.current.tableData.length !== 0) {
                     fnSaveSelectedButton();
                 } else {
                     alert("Order can't be empty")
@@ -389,6 +386,9 @@ export const OPServerOrderPlacing = () => {
                 break;
             case "addbutton":
                 break;
+            default:
+                console.log("No action defined for this button");
+                break;
         }
     }
 
@@ -404,10 +404,12 @@ export const OPServerOrderPlacing = () => {
             case "tbl_orderlist":
                 fnTableOrderList(index, rowmode, rowaction);
                 break;
+            default:
+                console.log("No action defined for this table");
+                break;
         }
     }
-
-
+    
     useEffect(() => {
         // Initialize the socket connection
         socketRef.current = io(socketUrl);

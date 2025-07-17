@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { OPValidations } from '../CommonOP/OPValidations';
 import { OPLoader } from '../ComponentOP/OPLoader';
 import { OPButton } from '../ComponentOP/OPButton';
 import { useSelector } from 'react-redux';
@@ -12,7 +11,6 @@ export const OPViewBench = () => {
     const [startInit, setStartInit] = useState(true);
     const [startRender, setStartRender] = useState(false);
     const [startLoader, setStartLoader] = useState(true);
-    const [rerender, setRerender] = useState(true);
     const [notify, setNotify] = useState(false);
     const [listBench, setListBench] = useState(true);
     const [viewBench, setViewBench] = useState(false);
@@ -21,9 +19,8 @@ export const OPViewBench = () => {
     const ctlNotify = useRef({})
     const tbl_BenchLst = useRef({})
 
-    const validate = OPValidations();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
-    const { responseData, isLoadingApi, apiKey, fetchError, serverRequest } = useFetch();
+    const { responseData, isLoadingApi, apiKey, serverRequest } = useFetch();
     function fnViewBenchRequest() {
         let _getBody = {
             companyName: getAppStoreData.companyName,
@@ -302,6 +299,8 @@ export const OPViewBench = () => {
             case "btn_delete":
                 fnDeleteData();
                 break;
+            default:
+                break;
         }
     }
 
@@ -358,6 +357,8 @@ export const OPViewBench = () => {
                         break;
                     case "VIEWBENCH":
                         initControl();
+                        break;
+                    default:
                         break;
                 }
             }
@@ -436,13 +437,12 @@ export const OPViewBench = () => {
                                                             <p>Showing Bench Details in ReadOnly Method</p>
                                                         </div>
                                                         <div className="border-bottom mb-3">
-                                                            
-                                                        <div className="row">
+
+                                                            <div className="row">
                                                                 <div className="col-md-4">
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[0]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -450,7 +450,6 @@ export const OPViewBench = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[1]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -458,7 +457,6 @@ export const OPViewBench = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[2]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -468,7 +466,6 @@ export const OPViewBench = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[3]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -476,7 +473,6 @@ export const OPViewBench = () => {
                                                                     <div className="mb-3">
                                                                         <OPTextBox
                                                                             ctl_Attribute={ctlAttribute.current[4]}
-                                                                            rerender={rerender}
                                                                         />
                                                                     </div>
                                                                 </div>
