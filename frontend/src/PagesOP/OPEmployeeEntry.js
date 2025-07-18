@@ -59,10 +59,13 @@ export const OPEmployeeEntry = () => {
             case "btn_signup":
                 navigate("student-signup")
                 break;
+            default:
+                console.error("Unknown button clicked:", btn_id);
+                break;
         }
     }
     useEffect(() => {
-        if (startInit == true)
+        if (startInit === true)
             initControl();
     }, [startInit]);
     return (<>
@@ -71,8 +74,7 @@ export const OPEmployeeEntry = () => {
             <div className="account-page">
                 <div className="main-wrapper">
                     <div className="account-content">
-                        <div className='mt-5em'></div>
-                        <div className="d-flex flex-wrap w-100 vh-100 justify-content-center">
+                        <div className="d-flex flex-wrap w-100 vh-100 justify-content-center pt-5">
                             <div className='d-flex justify-content-center flex-wrap overflow-auto p-4 w-50 bg-backdrop'>
                                 <form action='index.html' className='flex-fill'>
                                     <div className='mx-auto'>

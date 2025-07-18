@@ -22,7 +22,7 @@ export const OPHotelLogin = () => {
     const validate = OPValidations();
     const dispatchappStore = useDispatch();
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
-    const { responseData, isLoadingApi, apiKey, fetchError, serverRequest } = useFetch();
+    const { responseData, isLoadingApi, apiKey, serverRequest } = useFetch();
 
     function initControl() {
         dispatchappStore(
@@ -136,9 +136,6 @@ export const OPHotelLogin = () => {
         setStartLoader(false);
     }
 
-    function handleCheckBox(e) {
-
-    }
     function fnLogin() {
         let canFormSubmit = true;
         let err = [];
@@ -186,6 +183,9 @@ export const OPHotelLogin = () => {
             case "btn_login":
                 fnLogin();
                 break;
+            default:
+                console.log("Button not found");
+                break;
 
         }
     }
@@ -197,6 +197,10 @@ export const OPHotelLogin = () => {
                 switch (apiKey) {
                     case "LOGIN":
                         fnLoginResult();
+                        console.log("Login API called", responseData);
+                        break;
+                    default:
+                        console.log("API Key not found", apiKey);
                         break;
                 }
             }
@@ -240,8 +244,7 @@ export const OPHotelLogin = () => {
             <div className="account-page">
                 <div className="main-wrapper">
                     <div className="account-content">
-                        <div className='mt-5em'></div>
-                        <div className="d-flex flex-wrap w-100 v-100 justify-content-center">
+                        <div className="d-flex flex-wrap w-100 vh-100 justify-content-center pt-5">
                             <div className='d-flex justify-content-center flex-wrap p-4 w-50 bg-backdrop'>
                                 <div className='flex-fill'>
                                     <div className='mx-auto'>

@@ -255,7 +255,6 @@ export const OPServerOrderPlacing = () => {
         }
     }
 
-
     function fnConfirmOrder() {
         let canFormSubmit = true;
         let err = [];
@@ -342,6 +341,7 @@ export const OPServerOrderPlacing = () => {
         }));
         const studentName = getAppStoreData.userName;
         const collageid = getAppStoreData.collageid;
+        console.log(newContent, studentName, collageid)
         socketRef.current.emit('updateServerOrderPlacing', newContent, studentName, collageid);
 
         document.body.style = "";

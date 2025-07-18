@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import "../assets/plugins/icons/feather/feather.css";
 import "../assets/plugins/material/materialdesignicons.css"
 import { OPButton } from './OPButton';
@@ -7,7 +7,6 @@ import { OPMainSearchBar } from './OPMainSearchBar';
 import { OPNightModeToggle } from './OPNightModeToggle';
 import { useDispatch, useSelector } from 'react-redux';
 import { setlogininfo } from '../brewStore/AppState';
-import img4 from "../assets/img/img-4.jpg";
 
 export const OPMainMenuBar = () => {
     const [l_hover, setHover] = useState(false);
@@ -23,15 +22,8 @@ export const OPMainMenuBar = () => {
     const getAppStoreData = useSelector((state) => state.appstate.login_info);
     const dispatchappStore = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleDropdown = () => {
-        setIsOpen(true);
-    };
-    const toggleDropdownoff = () => {
-        setIsOpen(false);
-    };
     function initControl() {
         let ctlArray = [
             {
@@ -137,13 +129,13 @@ export const OPMainMenuBar = () => {
         }
     }
     function handleOnMouseEnterSidebarOpen() {
-        if (toggle == true) {
+        if (toggle === true) {
             document.body.classList.add("expand-menu");
             setSideBar(true);
         }
     }
     function handleOnMouseLeaveSidebarClose() {
-        if (toggle == true) {
+        if (toggle === true) {
             document.body.classList.remove("expand-menu");
             setSideBar(false);
         }
@@ -178,6 +170,9 @@ export const OPMainMenuBar = () => {
             case "headerbell":
                 setHeaderBell(true);
                 break;
+            default:
+                console.log("Unhandled button click:", btn_id);
+                break;
         }
     }
     function handleOnBlur(e) {
@@ -192,6 +187,9 @@ export const OPMainMenuBar = () => {
             case "headerbell":
                 setHeaderBell(false);
                 break;
+            default:
+                console.log("Unhandled button click:", btn_id);
+                break;
         }
     }
     function handleOnMouseDown(e) {
@@ -203,11 +201,14 @@ export const OPMainMenuBar = () => {
             case "logout":
                 navigate("/");
                 break;
+                default:
+                console.log("Unhandled button click:", btn_id);
+                break;
         }
         setClickProfile(false);
     }
     function handleOnQrCode() {
-        const url = `https://api.qrserver.com/v1/create-qr-code/?data=http://${process.env.REACT_APP_IP_ADDRESS}:3000/${getAppStoreData.usertype}/my-profile&size=200x200`;
+        const url = `https://api.qrserver.com/v1/create-qr-code/?data=https://canteen-billing.onrender.com/${getAppStoreData.usertype}/my-profile&size=200x200`;
         window.open(url, '_blank');
     }
     function handleOnClickNavLink(e) {
@@ -354,7 +355,7 @@ export const OPMainMenuBar = () => {
                                                 <Link className='dropdown-item'
                                                     onClick={(e) => { handleOnQrCode(e) }}
                                                 >
-                                                    <i class="ti ti-qrcode"></i> Qr code
+                                                    <i className="ti ti-qrcode"></i> Qr code
                                                 </Link>
                                                 <Link className='dropdown-item' to={"/"}>
                                                     <i className='ti ti-lock'></i> Logout

@@ -403,7 +403,7 @@ export const OPViewStudents = () => {
                 fnDeleteData();
                 break;
             case "btn_getQR":
-                const url = `https://api.qrserver.com/v1/create-qr-code/?data=http://${process.env.REACT_APP_IP_ADDRESS}:3000/user/${tbl_empLst.current.tabledataid}&size=200x200`;
+                const url = `https://api.qrserver.com/v1/create-qr-code/?data=https://canteen-billing.onrender.com/user/${tbl_empLst.current.tabledataid}&size=200x200`;
                 window.open(url, '_blank');
                 break;
             default:
